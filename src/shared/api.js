@@ -1,40 +1,29 @@
-const getAllTasks = async () => {
-  const getResponse = await fetch("https://jsonplaceholder.typicode.com/todos");
-  const tasksData = await getResponse.json();
-  return { data: tasksData, responseStatus: getResponse.status };
+const getAllTasks = () => {
+  return fetch(`https://jsonplaceholder.typicode.com/todos`).then((response) =>
+    response.json(),
+  );
 };
 
 const getSpecificTask = async (taskId) => {
-  const getResponse = await fetch(
-    `https://jsonplaceholder.typicode.com/todos/${taskId}`,
+  return fetch(`https://jsonplaceholder.typicode.com/todos/${taskId}`).then(
+    (response) => response.json(),
   );
-  const taskData = await getResponse.json();
-  return { data: taskData, responseStatus: getResponse.status };
 };
 
 const patchTask = async (dataToPost, taskId) => {
-  const patchResponse = await fetch(
-    `https://jsonplaceholder.typicode.com/todos/${taskId}`,
-    {
-      method: "PATCH",
-      body: JSON.stringify(dataToPost),
-      headers: {
-        "Content-Type": "application/json",
-      },
+  return fetch(`https://jsonplaceholder.typicode.com/todos/${taskId}`, {
+    method: "PATCH",
+    body: JSON.stringify(dataToPost),
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
-  const editedOrderData = await patchResponse.json();
-  return { data: editedOrderData, responseStatus: patchResponse.status };
+  }).then((response) => response.json());
 };
 
 const deleteSpecificTask = async (taskId) => {
-  const deleteResponse = await fetch(
-    `https://jsonplaceholder.typicode.com/todos/${taskId}`,
-    {
-      method: "DELETE",
-    },
-  );
-  return { data: null, responseStatus: deleteResponse.status };
+  return fetch(`https://jsonplaceholder.typicode.com/todos/${taskId}`, {
+    method: "DELETE",
+  }).then((response) => response.json());
 };
 
 export const api = {
