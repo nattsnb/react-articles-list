@@ -1,12 +1,28 @@
 import { api } from "../shared/api.js";
-import { List, ListItem, ListItemText } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
+import Grid2 from "@mui/material/Grid2";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const { getAllTasks, getSpecificTask, patchTask, deleteSpecificTask } = api;
 
 export function TasksList() {
   const [tasks, setTasks] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const flexContainer = {
+    display: "flex",
+    flexDirection: "row",
+    padding: 0,
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -22,17 +38,25 @@ export function TasksList() {
     <>
       <div>
         {!isLoading ? (
-          <List>
+          <Box sx={{ width: "100%", maxWidth: 600 }}>
             {tasks.map((task) => (
-              <li key={task.id}>
-                <ul>
-                  <ListItem>
-                    <ListItemText primary={task.title} />
-                  </ListItem>
-                </ul>
-              </li>
+              <List key={task.id} style={flexContainer}>
+                <ListItem>
+                  <Link to={`/task/${task.id}`}>{task.title}</Link>
+                </ListItem>
+                <ListItemButton edge="end">
+                  <Button variant={"contained"} style={{ minWidth: "80px" }}>
+                    Details
+                  </Button>
+                </ListItemButton>
+                <ListItemButton edge="end">
+                  <Button variant={"contained"} style={{ minWidth: "80px" }}>
+                    Delete
+                  </Button>
+                </ListItemButton>
+              </List>
             ))}
-          </List>
+          </Box>
         ) : (
           <p>Loading...</p>
         )}
