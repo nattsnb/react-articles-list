@@ -27,15 +27,15 @@ const patchTask = async (dataToPost, taskId, setPatchResponseFunction) => {
   setPatchResponseFunction(patchData);
 };
 
-const deleteSpecificTask = async (taskId, setDeleteResponseFunction) => {
+const deleteSpecificTask = async (taskId) => {
   const deleteResponse = await fetch(
     `https://jsonplaceholder.typicode.com/todos/${taskId}`,
     {
       method: "DELETE",
     },
   );
-  const deleteData = await deleteResponse.json();
-  setDeleteResponseFunction(deleteData);
+  console.log(deleteResponse.status);
+  return deleteResponse.status;
 };
 
 export const api = {

@@ -47,13 +47,16 @@ export function TasksList() {
                   <Button
                     variant={"contained"}
                     style={{ minWidth: "80px" }}
-                    color="secondary"
+                    color="success"
                   >
                     Edit
                   </Button>
                 </ListItemButton>
                 <ListItemButton edge="end">
                   <Button
+                    onClick={() => {
+                      api.deleteSpecificTask(task.id);
+                    }}
                     variant={"contained"}
                     style={{ minWidth: "80px" }}
                     color="error"
@@ -65,7 +68,7 @@ export function TasksList() {
                   <Button
                     variant={"contained"}
                     style={{ minWidth: "80px" }}
-                    color="success"
+                    color="secondary"
                   >
                     Details
                   </Button>
