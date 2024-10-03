@@ -2,17 +2,14 @@ import { api } from "../shared/api.js";
 import {
   Box,
   Button,
-  Divider,
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
+  Typography,
 } from "@mui/material";
-import Grid2 from "@mui/material/Grid2";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-const { getAllTasks, getSpecificTask, patchTask, deleteSpecificTask } = api;
+import styles from "./tasksList.module.css";
 
 export function TasksList() {
   const [tasks, setTasks] = useState(null);
@@ -26,8 +23,8 @@ export function TasksList() {
 
   useEffect(() => {
     setIsLoading(true);
-    getAllTasks()
-      .then((data) => setTasks(data))
+    api
+      .getAllTasks(setTasks)
       .catch((error) => {
         console.log("error fetching data", error);
       })
@@ -38,20 +35,39 @@ export function TasksList() {
     <>
       <div>
         {!isLoading ? (
-          <Box sx={{ width: "100%", maxWidth: 600 }}>
+          <Box sx={{ width: "100%", maxWidth: 750 }}>
             {tasks.map((task) => (
               <List key={task.id} style={flexContainer}>
                 <ListItem>
-                  <Link to={`/task/${task.id}`}>{task.title}</Link>
+                  <Typography variant="h6" gutterBottom>
+                    <Link to={`/task/${task.id}`}>{task.title}</Link>
+                  </Typography>
                 </ListItem>
                 <ListItemButton edge="end">
-                  <Button variant={"contained"} style={{ minWidth: "80px" }}>
-                    Details
+                  <Button
+                    variant={"contained"}
+                    style={{ minWidth: "80px" }}
+                    color="secondary"
+                  >
+                    Edit
                   </Button>
                 </ListItemButton>
                 <ListItemButton edge="end">
-                  <Button variant={"contained"} style={{ minWidth: "80px" }}>
+                  <Button
+                    variant={"contained"}
+                    style={{ minWidth: "80px" }}
+                    color="error"
+                  >
                     Delete
+                  </Button>
+                </ListItemButton>
+                <ListItemButton edge="end">
+                  <Button
+                    variant={"contained"}
+                    style={{ minWidth: "80px" }}
+                    color="success"
+                  >
+                    Details
                   </Button>
                 </ListItemButton>
               </List>

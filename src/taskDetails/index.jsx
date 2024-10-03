@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { api } from "../shared/api.js";
 
-const { getAllTasks, getSpecificTask, patchTask, deleteSpecificTask } = api;
-
 export function TaskDetails() {
   return (
     <>
