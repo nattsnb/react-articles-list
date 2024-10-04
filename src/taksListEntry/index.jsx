@@ -13,7 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import { api } from "../shared/api.js";
 import { useState } from "react";
-import {EditForm} from "../editForm/index.jsx";
+import { EditForm } from "../editForm/index.jsx";
 
 export function TasksListEntry({ taskDataObject }) {
   const [taskBeingEdited, setTaskBeingEdited] = useState(false);
@@ -62,7 +62,10 @@ export function TasksListEntry({ taskDataObject }) {
           </Button>
         </Stack>
       ) : (
-        <EditForm taskDataObject={taskDataObject}></EditForm>
+        <EditForm
+          taskDataObject={taskDataObject}
+          setTaskBeingEdited={setTaskBeingEdited}
+        ></EditForm>
       )}
       <Divider
         variant="middle"
