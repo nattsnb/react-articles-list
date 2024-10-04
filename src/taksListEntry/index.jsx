@@ -1,6 +1,7 @@
 import {
   Button,
   Container,
+  Divider,
   FormControl,
   InputLabel,
   MenuItem,
@@ -21,9 +22,9 @@ export function TasksListEntry({ taskDataObject }) {
 
   return (
     <>
-      <Container>
-        <Typography variant="h6" gutterBottom>
-          <Link to={`/task/${taskDataObject.id}`}>{taskDataObject.title}</Link>
+      <Container style={{ padding: "0px" }}>
+        <Typography variant="h5" gutterBottom>
+          {taskDataObject.title}
         </Typography>
       </Container>
       {!taskBeingEdited ? (
@@ -41,7 +42,11 @@ export function TasksListEntry({ taskDataObject }) {
               api.deleteSpecificTask(taskDataObject.id);
             }}
             variant={"contained"}
-            style={{ minWidth: "80px" }}
+            style={{
+              minWidth: "80px",
+              marginLeft: "12px",
+              marginRight: "12px",
+            }}
             color="error"
           >
             Delete
@@ -50,6 +55,7 @@ export function TasksListEntry({ taskDataObject }) {
             variant={"contained"}
             style={{ minWidth: "80px" }}
             color="secondary"
+            href={"/task/${taskDataObject.id"}
           >
             Details
           </Button>
@@ -102,6 +108,10 @@ export function TasksListEntry({ taskDataObject }) {
           </Button>
         </Container>
       )}
+      <Divider
+        variant="middle"
+        style={{ marginBottom: "45px", marginTop: "10px" }}
+      />
     </>
   );
 }
