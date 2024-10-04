@@ -56,7 +56,7 @@ export function TasksListEntry({ taskDataObject }) {
             variant={"contained"}
             style={{ minWidth: "80px" }}
             color="secondary"
-            href={"/task/${taskDataObject.id"}
+            href={`/task/${taskDataObject.id}`}
           >
             Details
           </Button>
