@@ -12,7 +12,7 @@ const getSpecificTask = async (taskId, setActiveTaskFunction) => {
   setActiveTaskFunction(taskData);
 };
 
-const patchTask = async (dataToPost, taskId, setPatchResponseFunction) => {
+const patchTask = async (dataToPost, taskId, setTaskBeingEditedFunction) => {
   const patchResponse = await fetch(
     `https://jsonplaceholder.typicode.com/todos/${taskId}`,
     {
@@ -23,8 +23,12 @@ const patchTask = async (dataToPost, taskId, setPatchResponseFunction) => {
       },
     },
   );
-  const patchData = await patchResponse.json();
-  setPatchResponseFunction(patchData);
+  if (patchResponse.status === 200) {
+    setTaskBeingEditedFunction(false);
+    console.log("Patch succeeded");
+  } else {
+    console.log("Patch didn't succeed" + patchResponse.status);
+  }
 };
 
 const deleteSpecificTask = async (taskId) => {
@@ -34,8 +38,11 @@ const deleteSpecificTask = async (taskId) => {
       method: "DELETE",
     },
   );
-  console.log(deleteResponse.status);
-  return deleteResponse.status;
+  if (deleteResponse.status === 200) {
+    console.log("Delete succeeded");
+  } else {
+    console.log("Delete didn't succeed" + deleteResponse.status);
+  }
 };
 
 export const api = {

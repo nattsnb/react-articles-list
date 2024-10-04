@@ -1,11 +1,6 @@
-import {
-  Button,
-  Container,
-  MenuItem,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { Button, Container, MenuItem, Stack, TextField } from "@mui/material";
 import { useState } from "react";
+import { api } from "../shared/api.js";
 
 const isCompletedSelectValues = [
   {
@@ -19,10 +14,20 @@ const isCompletedSelectValues = [
 ];
 
 export function EditForm({ taskDataObject, setTaskBeingEdited }) {
-  const [title, setTitle] = useState(taskDataObject.title);
-  const [isCompleted, setIsCompleted] = useState(
+  const [newTitle, setNewTitle] = useState(taskDataObject.title);
+  const [newCompletedStatus, setNewCompletedStatus] = useState(
     taskDataObject.completed === true ? "completed" : "notCompleted",
   );
+
+  const onClickSaveButton = () => {
+    const dataToPost = {
+      userId: taskDataObject.userId,
+      id: taskDataObject.id,
+      title: newTitle,
+      completed: newCompletedStatus,
+    };
+    api.patchTask(dataToPost, taskDataObject.id, setTaskBeingEdited);
+  };
 
   return (
     <Container>
@@ -30,7 +35,7 @@ export function EditForm({ taskDataObject, setTaskBeingEdited }) {
         fullWidth
         id="title"
         label={"Title"}
-        defaultValue={title}
+        defaultValue={newTitle}
         variant="outlined"
       />
       <Stack direction="row">
@@ -55,7 +60,7 @@ export function EditForm({ taskDataObject, setTaskBeingEdited }) {
           id="is-completed"
           select
           label="Is Completed?"
-          defaultValue={isCompleted}
+          defaultValue={newCompletedStatus}
         >
           {isCompletedSelectValues.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -68,6 +73,7 @@ export function EditForm({ taskDataObject, setTaskBeingEdited }) {
         variant={"contained"}
         style={{ minWidth: "80px" }}
         color="success"
+        onClick={onClickSaveButton}
       >
         Save
       </Button>
