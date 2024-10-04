@@ -2,14 +2,22 @@ import { api } from "../shared/api.js";
 import {
   Box,
   Button,
+  Container,
+  FormControl,
+  InputLabel,
   List,
   ListItem,
   ListItemButton,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./tasksList.module.css";
+import { TasksListEntry } from "../taksListEntry/index.jsx";
 
 export function TasksList() {
   const [tasks, setTasks] = useState(null);
@@ -35,47 +43,14 @@ export function TasksList() {
     <>
       <div>
         {!isLoading ? (
-          <Box sx={{ width: "100%", maxWidth: 750 }}>
+          <Container sx={{ width: "100%", maxWidth: 750 }}>
             {tasks.map((task) => (
-              <List key={task.id} style={flexContainer}>
-                <ListItem>
-                  <Typography variant="h6" gutterBottom>
-                    <Link to={`/task/${task.id}`}>{task.title}</Link>
-                  </Typography>
-                </ListItem>
-                <ListItemButton edge="end">
-                  <Button
-                    variant={"contained"}
-                    style={{ minWidth: "80px" }}
-                    color="success"
-                  >
-                    Edit
-                  </Button>
-                </ListItemButton>
-                <ListItemButton edge="end">
-                  <Button
-                    onClick={() => {
-                      api.deleteSpecificTask(task.id);
-                    }}
-                    variant={"contained"}
-                    style={{ minWidth: "80px" }}
-                    color="error"
-                  >
-                    Delete
-                  </Button>
-                </ListItemButton>
-                <ListItemButton edge="end">
-                  <Button
-                    variant={"contained"}
-                    style={{ minWidth: "80px" }}
-                    color="secondary"
-                  >
-                    Details
-                  </Button>
-                </ListItemButton>
-              </List>
+              <TasksListEntry
+                taskDataObject={task}
+                key={task.id}
+              ></TasksListEntry>
             ))}
-          </Box>
+          </Container>
         ) : (
           <p>Loading...</p>
         )}
