@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { api } from "../shared/api.js";
 import { useEffect, useState } from "react";
 import { EditForm } from "../editForm/index.jsx";
-import { Button, Container, Stack, Typography } from "@mui/material";
+import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 
 export function TaskDetails() {
   const [displayedTaskDataObject, setDisplayedTaskDataObject] = useState(null);
@@ -44,6 +44,15 @@ export function TaskDetails() {
           </>
         ) : (
           <p>Loading...</p>
+        )}
+        {taskBeingEdited ? (
+          <></>
+        ) : (
+          <Container style={{ marginTop: "30px" }}>
+            <Typography variant="h6" gutterBottom>
+              Saved successfully.
+            </Typography>
+          </Container>
         )}
       </Container>
     </>
