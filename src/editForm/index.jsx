@@ -32,7 +32,7 @@ export function EditForm({ taskDataObject, setTaskBeingEdited }) {
   return (
     <Container>
       <TextField
-          sx={{width: "650px" }}
+        sx={{ width: "650px" }}
         id="title"
         label={"Title"}
         defaultValue={newTitle}

@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { api } from "../shared/api.js";
 import { useEffect, useState } from "react";
-import {EditForm} from "../editForm/index.jsx";
+import { EditForm } from "../editForm/index.jsx";
+import { Button, Container, Stack, Typography } from "@mui/material";
 
 export function TaskDetails() {
   const [displayedTaskDataObject, setDisplayedTaskDataObject] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [taskBeingEdited, setTaskBeingEdited] = useState(true);
 
   const url = new URL(window.location);
   const taskId = url.pathname.replace("/task/", "");
@@ -22,19 +24,28 @@ export function TaskDetails() {
 
   return (
     <>
-      <div>
-        <h2>{`Task ${taskId}`}</h2>
+      <Container style={{ marginTop: "40px" }}>
+        <Stack direction="row" style={{ marginBottom: "30px" }}>
+          <h2>{`Task ${taskId}`}</h2>
+          <Button
+            href={"/"}
+            variant={"contained"}
+            style={{ marginLeft: "30px" }}
+          >
+            Back to List
+          </Button>
+        </Stack>
         {!isLoading ? (
           <>
-          <h3>{displayedTaskDataObject.title}</h3>
-            <EditForm taskDataObject={displayedTaskDataObject} ></EditForm>
+            <EditForm
+              taskDataObject={displayedTaskDataObject}
+              setTaskBeingEdited={setTaskBeingEdited}
+            ></EditForm>
           </>
         ) : (
           <p>Loading...</p>
         )}
-      </div>
-
-      <Link to="/">Back to list</Link>
+      </Container>
     </>
   );
 }
