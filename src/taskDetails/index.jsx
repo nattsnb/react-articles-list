@@ -3,14 +3,14 @@ import { api } from "../shared/api.js";
 import { useEffect, useState } from "react";
 import { EditForm } from "../editForm/index.jsx";
 import { Button, Container, Stack, Typography } from "@mui/material";
+import {useParams} from "react-router-dom";
 
 export function TaskDetails() {
   const [displayedTaskDataObject, setDisplayedTaskDataObject] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [taskBeingEdited, setTaskBeingEdited] = useState(true);
 
-  const url = new URL(window.location);
-  const taskId = url.pathname.replace("/task/", "");
+  const { taskId } = useParams();
 
   useEffect(() => {
     async function getSpecificTaskData() {
