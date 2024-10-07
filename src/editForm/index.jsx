@@ -1,4 +1,11 @@
-import { Button, Container, MenuItem, Stack, TextField } from "@mui/material";
+import {
+  Button,
+  Container,
+  MenuItem,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { api } from "../shared/api.js";
 import styles from "./editForm.module.css";
@@ -19,12 +26,16 @@ export function EditForm({ taskDataObject, setTaskBeingEdited }) {
   const [newCompletedStatus, setNewCompletedStatus] = useState(
     taskDataObject.completed === true ? "completed" : "notCompleted",
   );
+  const [errorMessage, setErrorMessage] = useState(null);
 
   async function patchActiveTask(dataToPost) {
     try {
       const patchResponse = await api.patchTask(dataToPost, taskDataObject.id);
-    } catch (error) {}
-    setTaskBeingEdited(false);
+      setTaskBeingEdited(false);
+    } catch (error) {
+      setErrorMessage(error.message);
+      setTaskBeingEdited(true);
+    }
   }
   const onClickSaveButton = () => {
     const dataToPost = {
@@ -76,6 +87,13 @@ export function EditForm({ taskDataObject, setTaskBeingEdited }) {
           ))}
         </TextField>
       </Stack>
+      {!errorMessage ? (
+        <></>
+      ) : (
+        <Typography variant="h5" gutterBottom>
+          {errorMessage}
+        </Typography>
+      )}
       <Button
         variant={"contained"}
         className={styles.saveButton}

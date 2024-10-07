@@ -3,7 +3,7 @@ import { api } from "../shared/api.js";
 import { useEffect, useState } from "react";
 import { EditForm } from "../editForm/index.jsx";
 import { Button, Container, Stack, Typography } from "@mui/material";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export function TaskDetails() {
   const [displayedTaskDataObject, setDisplayedTaskDataObject] = useState(null);
