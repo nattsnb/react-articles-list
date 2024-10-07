@@ -8,20 +8,16 @@ export function TasksList() {
   const [tasks, setTasks] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const flexContainer = {
-    display: "flex",
-    flexDirection: "row",
-    padding: 0,
-  };
-
   useEffect(() => {
-    setIsLoading(true);
-    api
-      .getAllTasks(setTasks)
-      .catch((error) => {
-        console.log("error fetching data", error);
-      })
-      .finally(() => setIsLoading(false));
+    async function getTasksDetails() {
+      setIsLoading(true);
+      try {
+        const tasksResponse = await api.getAllTasks();
+        setTasks(tasksResponse);
+      } catch (error) {}
+      setIsLoading(false);
+    }
+    getTasksDetails();
   }, []);
 
   return (

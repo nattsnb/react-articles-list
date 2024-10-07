@@ -21,6 +21,14 @@ export function TasksListEntry({ taskDataObject }) {
     setTaskBeingEdited(true);
   };
 
+  const deleteTask = async () => {
+    try {
+      await api.deleteSpecificTask(taskDataObject.id);
+    } catch (error) {
+      // setError(error.message);
+    }
+  };
+
   return (
     <>
       <Container style={{ padding: "0px" }}>
@@ -39,9 +47,7 @@ export function TasksListEntry({ taskDataObject }) {
             Edit
           </Button>
           <Button
-            onClick={() => {
-              api.deleteSpecificTask(taskDataObject.id);
-            }}
+            onClick={deleteTask}
             variant={"contained"}
             style={{
               minWidth: "80px",

@@ -19,6 +19,12 @@ export function EditForm({ taskDataObject, setTaskBeingEdited }) {
     taskDataObject.completed === true ? "completed" : "notCompleted",
   );
 
+  async function patchActiveTask(dataToPost) {
+    try {
+      const patchResponse = await api.patchTask(dataToPost, taskDataObject.id);
+    } catch (error) {}
+    setTaskBeingEdited(false);
+  }
   const onClickSaveButton = () => {
     const dataToPost = {
       userId: taskDataObject.userId,
@@ -26,7 +32,7 @@ export function EditForm({ taskDataObject, setTaskBeingEdited }) {
       title: newTitle,
       completed: newCompletedStatus,
     };
-    api.patchTask(dataToPost, taskDataObject.id, setTaskBeingEdited);
+    patchActiveTask(dataToPost);
   };
 
   return (

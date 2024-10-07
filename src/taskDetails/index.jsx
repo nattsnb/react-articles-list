@@ -13,13 +13,15 @@ export function TaskDetails() {
   const taskId = url.pathname.replace("/task/", "");
 
   useEffect(() => {
-    setIsLoading(true);
-    api
-      .getSpecificTask(taskId, setDisplayedTaskDataObject)
-      .catch((error) => {
-        console.log("error fetching data", error);
-      })
-      .finally(() => setIsLoading(false));
+    async function getSpecificTaskData() {
+      setIsLoading(true);
+      try {
+        const taskResponse = await api.getSpecificTask(taskId);
+        setDisplayedTaskDataObject(taskResponse);
+      } catch (error) {}
+      setIsLoading(false);
+    }
+    getSpecificTaskData();
   }, []);
 
   return (

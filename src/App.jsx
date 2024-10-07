@@ -3,7 +3,7 @@ import { TaskDetails } from "./taskDetails/index.jsx";
 import { TasksList } from "./tasksList/index.jsx";
 import styles from "./app.module.css";
 import { useEffect, useState } from "react";
-import { ProtectedRoute } from "./protectedRoute/protectedRoute.jsx";
+import { ProtectedRoute } from "./shared/protectedRoute.jsx";
 
 export function App() {
   const isAdmin = localStorage.getItem("isAdmin");
