@@ -1,6 +1,7 @@
 import { Button, Container, MenuItem, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import { api } from "../shared/api.js";
+import styles from "./editForm.module.css";
 
 const isCompletedSelectValues = [
   {
@@ -38,7 +39,7 @@ export function EditForm({ taskDataObject, setTaskBeingEdited }) {
   return (
     <Container>
       <TextField
-        sx={{ width: "650px" }}
+        className={styles.titleTextField}
         id="title"
         label={"Title"}
         defaultValue={newTitle}
@@ -47,7 +48,7 @@ export function EditForm({ taskDataObject, setTaskBeingEdited }) {
       <Stack direction="row">
         <TextField
           disabled
-          sx={{ m: 1, width: "25ch" }}
+          className={styles.smallTextFields}
           id="user-id"
           label={"User Id"}
           defaultValue={taskDataObject.userId}
@@ -55,14 +56,14 @@ export function EditForm({ taskDataObject, setTaskBeingEdited }) {
         />
         <TextField
           disabled
-          sx={{ m: 1, width: "25ch" }}
+          className={styles.smallTextFields}
           id="post-id"
           label={"Post Id"}
           defaultValue={taskDataObject.id}
           variant="outlined"
         />
         <TextField
-          sx={{ m: 1, width: "25ch" }}
+          className={styles.smallTextFields}
           id="is-completed"
           select
           label="Is Completed?"
@@ -77,7 +78,7 @@ export function EditForm({ taskDataObject, setTaskBeingEdited }) {
       </Stack>
       <Button
         variant={"contained"}
-        style={{ minWidth: "80px" }}
+        className={styles.saveButton}
         color="success"
         onClick={onClickSaveButton}
       >

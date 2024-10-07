@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+import styles from "./taskDetails.module.css";
 import { api } from "../shared/api.js";
 import { useEffect, useState } from "react";
 import { EditForm } from "../editForm/index.jsx";
-import { Button, Container, Stack, TextField, Typography } from "@mui/material";
+import { Button, Container, Stack, Typography } from "@mui/material";
 
 export function TaskDetails() {
   const [displayedTaskDataObject, setDisplayedTaskDataObject] = useState(null);
@@ -26,13 +26,13 @@ export function TaskDetails() {
 
   return (
     <>
-      <Container style={{ marginTop: "40px" }}>
-        <Stack direction="row" style={{ marginBottom: "30px" }}>
+      <Container className={styles.mainContainer}>
+        <Stack direction="row" className={styles.stackTaskNumberAndBackButton}>
           <h2>{`Task ${taskId}`}</h2>
           <Button
             href={"/"}
             variant={"contained"}
-            style={{ marginLeft: "30px" }}
+            className={styles.backButton}
           >
             Back to List
           </Button>
@@ -50,7 +50,7 @@ export function TaskDetails() {
         {taskBeingEdited ? (
           <></>
         ) : (
-          <Container style={{ marginTop: "30px" }}>
+          <Container className={styles.patchResponseMessage}>
             <Typography variant="h6" gutterBottom>
               Saved successfully.
             </Typography>

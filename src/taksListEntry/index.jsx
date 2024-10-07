@@ -1,19 +1,9 @@
-import {
-  Button,
-  Container,
-  Divider,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import { Button, Container, Divider, Stack, Typography } from "@mui/material";
 import { api } from "../shared/api.js";
 import { useState } from "react";
 import { EditForm } from "../editForm/index.jsx";
+import styles from "./taskListEntry.module.css";
+import clsx from "clsx";
 
 export function TasksListEntry({ taskDataObject }) {
   const [taskBeingEdited, setTaskBeingEdited] = useState(false);
@@ -31,7 +21,7 @@ export function TasksListEntry({ taskDataObject }) {
 
   return (
     <>
-      <Container style={{ padding: "0px" }}>
+      <Container className={styles.containerTitle}>
         <Typography variant="h5" gutterBottom>
           {taskDataObject.title}
         </Typography>
@@ -40,7 +30,7 @@ export function TasksListEntry({ taskDataObject }) {
         <Stack direction="row">
           <Button
             variant={"contained"}
-            style={{ minWidth: "80px" }}
+            className={styles.button}
             color="success"
             onClick={onEditButtonClick}
           >
@@ -49,18 +39,14 @@ export function TasksListEntry({ taskDataObject }) {
           <Button
             onClick={deleteTask}
             variant={"contained"}
-            style={{
-              minWidth: "80px",
-              marginLeft: "12px",
-              marginRight: "12px",
-            }}
+            className={clsx(styles.button, styles.deleteButton)}
             color="error"
           >
             Delete
           </Button>
           <Button
             variant={"contained"}
-            style={{ minWidth: "80px" }}
+            className={styles.button}
             color="secondary"
             href={`/task/${taskDataObject.id}`}
           >
@@ -73,10 +59,7 @@ export function TasksListEntry({ taskDataObject }) {
           setTaskBeingEdited={setTaskBeingEdited}
         ></EditForm>
       )}
-      <Divider
-        variant="middle"
-        style={{ marginBottom: "45px", marginTop: "10px" }}
-      />
+      <Divider variant="middle" className={styles.divider} />
     </>
   );
 }

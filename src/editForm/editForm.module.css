@@ -1,0 +1,13 @@
+.saveButton {
+  min-width: 80px;
+}
+
+.titleTextField {
+  width: 650px;
+  margin-bottom: 7px;
+}
+
+.smallTextFields {
+  width: 25ch;
+  margin: 7px;
+}
