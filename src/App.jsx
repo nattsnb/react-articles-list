@@ -4,19 +4,14 @@ import { TasksList } from "./tasksList/index.jsx";
 import styles from "./app.module.css";
 import { useEffect, useState } from "react";
 import { ProtectedRoute } from "./shared/protectedRoute.jsx";
+import { IS_ADMIN_STORAGE_KEY } from "./shared/constans.js";
 
 export function App() {
-  const isAdmin = localStorage.getItem("isAdmin");
-  const [admin, setAdmin] = useState(isAdmin);
-
-  useEffect(() => {
-    if (isAdmin === "admin") {
-      setAdmin("admin");
-    } else {
-      setAdmin(null);
-    }
-  }, [isAdmin]);
-
+  const admin = localStorage.getItem(IS_ADMIN_STORAGE_KEY);
+  let isAdmin = false;
+  if (admin === "true") {
+    isAdmin = true;
+  }
   return (
     <div>
       <h1>To Do List Example</h1>
@@ -25,7 +20,7 @@ export function App() {
         <Route
           path="/task/:taskId"
           element={
-            <ProtectedRoute admin={admin}>
+            <ProtectedRoute admin={isAdmin}>
               <TaskDetails />
             </ProtectedRoute>
           }
