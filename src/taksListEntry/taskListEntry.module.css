@@ -1,0 +1,25 @@
+.button {
+  min-width: 80px;
+}
+
+.deleteButton {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.divider {
+  margin-bottom: 45px;
+  margin-top: 10px;
+}
+
+.containerTitle {
+  padding: 0;
+}
+
+.containerButtonsAndError {
+  padding: 0;
+}
+
+.containerList {
+  margin: 0;
+}
